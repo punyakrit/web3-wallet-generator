@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { generateMnemonic, mnemonicToSeedSync } from "bip39";
+import { Copy } from "lucide-react";
 
 function Home() {
   const [memonicWord, setMemonicWord] = useState("");
@@ -8,12 +9,16 @@ function Home() {
   const [wordArr, setWordArr] = useState<string[]>([]);
 
   function generateWords() {
-    setMemonicWord(generateMnemonic(wordCount));
-    const arrayType = memonicWord.split(" ");
-    setWordArr(arrayType);
-    console.log(wordArr);
+    const mnemonic = generateMnemonic(wordCount); 
+    setMemonicWord(mnemonic); 
+    const arrayType = mnemonic.split(" "); 
+    setWordArr(arrayType); 
+    console.log(arrayType);
+  }
 
-    // const seed = mnemonicToSeedSync(memonicWord);
+  function copyFunction(){
+    navigator.clipboard.writeText(memonicWord)
+    alert("Secret phase copied")
   }
 
   return (
@@ -34,6 +39,9 @@ function Home() {
         <div className="text-center font-bold text-xl mb-4">
             Secret Key Pair
         </div>
+        <div className="flex justify-end cursor-pointer " onClick={copyFunction}>
+            <Copy/>
+            </div>
           <div className="flex flex-wrap gap-2 justify-center">
             {wordArr.map((word, index) => (
               <div
