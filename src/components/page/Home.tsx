@@ -8,7 +8,6 @@ import { Keypair } from "@solana/web3.js";
 
 function Home() {
   const [memonicWord, setMemonicWord] = useState("");
-  const [wordCount, setWordCount] = useState(128);
   const [wordArr, setWordArr] = useState<string[]>([]);
   const [keyPair, setKeyPair] = useState<{ public: string; private: string }[]>(
     []
@@ -17,7 +16,7 @@ function Home() {
 
   function generateWords() {
     setKeyPair([]);
-    const mnemonic = generateMnemonic(wordCount);
+    const mnemonic = generateMnemonic(128);
     setMemonicWord(mnemonic);
     const arrayType = mnemonic.split(" ");
     setWordArr(arrayType);
